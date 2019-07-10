@@ -1,0 +1,24 @@
+name: sls-es-demo
+stage: dev
+region: eu-west-1
+
+awsElasticsearch:
+  component: "../../aws-elasticsearch"
+  inputs:
+    name: sls-es-demo
+    ebsOptions:
+      EBSEnabled: true
+      VolumeSize: 20
+      VolumeType: 'gp2'
+    accessPolicies:
+      Version: "2012-10-17"
+      Statement:
+        - Effect: Allow
+          Principal:
+            AWS:
+              - "*"
+          Action:
+            - es:*
+          Resource:
+            - "arn:aws:es:${region}:*:domain/sls-es-demo/*"
+    region: ${region}

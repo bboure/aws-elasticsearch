@@ -1,0 +1,19 @@
+{
+  "name": "@bboure/aws-elasticsearch",
+  "version": "0.1.0",
+  "main": "./serverless.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@serverless/core": "0.1.0",
+    "aws-sdk": "^2.483.0",
+    "lodash": "^4.17.11"
+  },
+  "devDependencies": {
+    "eslint": "^6.0.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.18.0"
+  }
+}
