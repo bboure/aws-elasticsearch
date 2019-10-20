@@ -47,7 +47,7 @@ name: my-component
 stage: dev
 
 elasticSearch:
-  component: "bboure/aws-elasticsearch"
+  component: "@bboure/aws-elasticsearch"
   inputs:
     name: my-es-domain
     elasticsearchVersion: '6.7'
