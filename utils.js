@@ -107,14 +107,20 @@ const configChanged = (prevDomain, domain) => {
   const keys = [
     'name',
     'accessPolicies',
-    'ebsOptions',
-    'elasticsearchClusterConfig',
     'snapshotOptions',
   ];
   const inputs = pick(domain, keys);
   const prevInputs = pick(prevDomain, keys);
 
-  return !isMatch(prevInputs, inputs);
+  const ebsOptions = pick(domain.ebsOptions, ['EBSEnabled', 'VolumeSize', 'VolumeType']);
+  const prevEbsOptions = pick(prevDomain.ebsOptions, ['EBSEnabled', 'VolumeSize', 'VolumeType']);
+
+  const clusterConfig = pick(domain.elasticsearchClusterConfig, ['InstanceCount', 'InstanceType']);
+  const prevClusterConfig = pick(prevDomain.elasticsearchClusterConfig, ['InstanceCount', 'InstanceType']);
+
+  return !isMatch(prevInputs, inputs)
+    || !isMatch(prevEbsOptions, ebsOptions)
+    || !isMatch(prevClusterConfig, clusterConfig);
 };
 
 module.exports = {
