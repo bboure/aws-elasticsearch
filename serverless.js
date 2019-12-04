@@ -56,6 +56,22 @@ const fixArrays = object => reduce(
   {},
 );
 
+// follows https://github.com/serverless-components/aws-dynamodb
+const setDomainName = (component, inputs, config) => {
+  const generatedName = inputs.name
+    ? `${inputs.name}-${component.context.resourceId()}`
+    : component.context.resourceId();
+
+  const hasDeployedBefore = 'nameInput' in component.state;
+  const givenNameHasNotChanged = component.state.nameInput && component.state.nameInput === inputs.name;
+  const bothLastAndCurrentDeployHaveNoNameDefined = !component.state.nameInput && !inputs.name;
+
+  config.name = hasDeployedBefore && (givenNameHasNotChanged || bothLastAndCurrentDeployHaveNoNameDefined)
+    ? component.state.name
+    : generatedName;
+
+  component.state.nameInput = inputs.name || false;
+};
 
 class AwsElasticsearch extends Component {
   async default(inputs = {}) {
@@ -67,6 +83,10 @@ class AwsElasticsearch extends Component {
       credentials: this.context.credentials.aws,
     });
 
+    this.context.debug(`Checking if domain ${config.name} already exists in the ${config.region} region.`);
+
+    setDomainName(this, inputs, config);
+
     let prevDomain = await getDomain({ elastic, ...config });
 
     if (prevDomain && prevDomain.processing) {
@@ -76,14 +96,17 @@ class AwsElasticsearch extends Component {
     }
 
     if (!prevDomain) {
+      this.context.debug('Domain does not exist. A new one will be created.');
       this.context.status('Creating');
       const { arn, endpoint } = await createDomain({ elastic, ...config });
       config.arn = arn;
       config.endpoint = endpoint;
     } else {
+      this.context.debug('Domain already exists..');
       config.arn = prevDomain.arn;
       config.endpoint = prevDomain.endpoint;
       if (configChanged(prevDomain, config)) {
+        this.context.debug('Updating information.');
         this.context.status('Updating');
         await updateDomain({ elastic, ...config });
       } else {
@@ -92,7 +115,10 @@ class AwsElasticsearch extends Component {
     }
 
     const outputs = pick(config, ['name', 'arn', 'endpoint', 'region']);
-    this.state = outputs;
+    this.state = {
+      ...this.state,
+      ...outputs,
+    };
     await this.save();
 
     // Return your outputs
