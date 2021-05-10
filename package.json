@@ -9,7 +9,7 @@
   "dependencies": {
     "@serverless/core": "^1.0.0",
     "aws-sdk": "^2.483.0",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "eslint": "^6.0.1",
