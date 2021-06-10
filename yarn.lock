@@ -18,10 +18,10 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
-"@serverless/core@^0.1.0":
-  version "0.1.26"
-  resolved "https://registry.yarnpkg.com/@serverless/core/-/core-0.1.26.tgz#a169f4eea1675c37e963e1e3df36676f82a82649"
-  integrity sha512-syPB6HZlbJIxHlhfArWt776b2/S+fbQhuNdlNdyyWFuNmqcwH1kCGc0rZXT7S8s5JogROu0GUcb85PrWCRa9vg==
+"@serverless/core@^1.0.0":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@serverless/core/-/core-1.1.2.tgz#96a2ac428d81c0459474e77db6881ebdd820065d"
+  integrity sha512-PY7gH+7aQ+MltcUD7SRDuQODJ9Sav9HhFJsgOiyf8IVo7XVD6FxZIsSnpMI6paSkptOB7n+0Jz03gNlEkKetQQ==
   dependencies:
     fs-extra "^7.0.1"
     js-yaml "^3.13.1"
@@ -950,9 +950,9 @@ normalize-package-data@^2.3.2:
     validate-npm-package-license "^3.0.1"
 
 normalize-url@^4.1.0:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-4.5.0.tgz#453354087e6ca96957bd8f5baf753f5982142129"
-  integrity sha512-2s47yzUxdexf1OhyRi4Em83iQk0aPvwTddtFz4hnSSw9dCEsLEGf6SwIO8ss/19S9iBb5sJaOuTvTGDeZI00BQ==
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-4.5.1.tgz#0dd90cf1288ee1d1313b87081c9a5932ee48518a"
+  integrity sha512-9UZCFRHQdNrfTpGg8+1INIg93B6zE0aXMVFkw1WFwvO4SlZywU6aLg5Of0Ap/PgcbSw4LNxvMWXMeugwMCX0AA==
 
 object-inspect@^1.6.0:
   version "1.6.0"
